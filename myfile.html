@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Simple Calculator</h2>
+        <input type="number" id="num1" placeholder="Enter first number" required><br>
+        <input type="number" id="num2" placeholder="Enter second number" required><br><br>
+
+        <button onclick="performOperation('+')">Add</button>
+        <button onclick="performOperation('-')">Subtract</button>
+        <button onclick="performOperation('*')">Multiply</button>
+        <button onclick="performOperation('/')">Divide</button><br><br>
+
+        <h3 id="result">Result: </h3>
+    </div>
+
+    <script>
+        function performOperation(operation) {
+            // Get values from inputs
+            var num1 = parseFloat(document.getElementById('num1').value);
+            var num2 = parseFloat(document.getElementById('num2').value);
+            var result = 0;
+            var resultText = "";
+
+            // Check if numbers are valid
+            if (isNaN(num1) || isNaN(num2)) {
+                resultText = "Please enter valid numbers.";
+            } else {
+                switch (operation) {
+                    case '+':
+                        result = num1 + num2;
+                        resultText = "Result: " + result;
+                        break;
+                    case '-':
+                        result = num1 - num2;
+                        resultText = "Result: " + result;
+                        break;
+                    case '*':
+                        result = num1 * num2;
+                        resultText = "Result: " + result;
+                        break;
+                    case '/':
+                        if (num2 === 0) {
+                            resultText = "Error! Division by zero.";
+                        } else {
+                            result = num1 / num2;
+                            resultText = "Result: " + result;
+                        }
+                        break;
+                    default:
+                        resultText = "Invalid operation.";
+                }
+            }
+            document.getElementById('result').innerText = resultText;
+        }
+    </script>
+</body>
+</html>
